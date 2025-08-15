@@ -1,4 +1,4 @@
-import 'package:flutter_review/local_storage/share_preferences.dart';
+import 'package:flutter_review/core/service/share_preferences.dart';
 import 'package:flutter_review/models/emp_model.dart';
 import 'package:get/get.dart';
 
