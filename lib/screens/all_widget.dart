@@ -108,6 +108,7 @@ class _AllWidgetState extends State<AllWidget> {
                                   hintText: 'list of ingredients',
                                 ),
                               ),
+                              SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [

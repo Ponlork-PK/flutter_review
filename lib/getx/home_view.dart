@@ -4,168 +4,118 @@ import 'package:flutter_review/models/emp_model.dart';
 import 'package:get/get.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
 
+  @override
+  final HomeController controller = Get.put(HomeController());
+
+  void showDialog({EmpModel? employee, int? index}) {
+    final nameController = TextEditingController(text: employee?.name ?? '');
+    final ageController = TextEditingController(text: employee?.age.toString() ?? '');
+    final positionController = TextEditingController(text: employee?.position ?? '');
+
+    Get.defaultDialog(
+      title: employee == null ? "Add Employee" : "Edit Employee",
+      content: Column(
+        children: [
+          TextField(
+            controller: nameController,
+            decoration: InputDecoration(labelText: 'Name'),
+          ),
+          TextField(
+            controller: ageController,
+            decoration: InputDecoration(labelText: 'Age'),
+            keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: positionController,
+            decoration: InputDecoration(labelText: 'Position'),
+          ),
+        ],
+      ),
+      textCancel: "Cancel",
+      cancelTextColor: Colors.red,
+      textConfirm: "Done",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        final name = nameController.text.trim();
+        final age = int.tryParse(ageController.text.trim()) ?? 0;
+        final position = positionController.text.trim();
+
+        if (name.isNotEmpty && position.isNotEmpty && age > 0) {
+          final newEmp = EmpModel(name: name, age: age, position: position);
+
+          if (employee == null) {
+            controller.addEmployee(newEmp);
+          } else {
+            controller.updateEmployee(index!, newEmp);
+          }
+          Get.back();
+        }
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: const Text('GetX'),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: IconButton(
-                onPressed: (){
-                  showDialog(
-                    context: context, 
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Add Employee'),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        elevation: 5,
-                        actions: [
-                          TextField(
-                            controller: controller.textNameEditingController,
-                            decoration: InputDecoration(
-                              hintText: 'name',
-                            ),
+      appBar: AppBar(centerTitle: true, title: Text("Employee List")),
+      body: Obx(() {
+        if (controller.setTextValue.isEmpty) {
+          return Center(child: Text("No employees yet"));
+        }
+        return ListView.builder(
+          itemCount: controller.setTextValue.length,
+          itemBuilder: (_, index) {
+            final emp = controller.setTextValue[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                width: double.infinity,
+                height: 100,
+                margin: EdgeInsets.only(bottom: 5),
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name: ${emp.name}'),
+                          Text('Age: ${emp.age}'),
+                          Text('Position: ${emp.position}'),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () => showDialog(employee: emp, index: index),
                           ),
-                          TextField(
-                            controller: controller.textAgeEditingController,
-                            decoration: InputDecoration(
-                              hintText: 'age',
-                            ),
-                          ),
-                          TextField(
-                            controller: controller.textPositionEditingController,
-                            decoration: InputDecoration(
-                              hintText: 'position',
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                onPressed: (){
-                                  // Navigator.pop(context);
-                                  Get.back();
-                                }, 
-                                child: Text(
-                                  'Cancel',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: (){
-                                  // controller.setTextValue[controller.textNameEditingController.text, controller.textAgeEditingController.text, controller.textPositionEditingController.text];
-                                  EmpModel(name: controller.textNameEditingController.text, age: controller.textAgeEditingController.text, position: controller.textPositionEditingController.text);
-                                  // controller.setTextName(controller.textNameEditingController.text);
-                                  // controller.setTextAge(controller.textAgeEditingController.text);
-                                  // controller.setTextPosition(controller.textPositionEditingController.text);
-                                  // Navigator.pop(context);
-                                  Get.back();
-                                },
-                                child: Text(
-                                  'Done',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue
-                                  ),
-                                ),
-                              ),
-                            ],
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => controller.deleteEmployee(index),
                           ),
                         ],
-                      );
-                    }
-                  );
-                }, 
-                icon: Icon(Icons.add)),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: List.generate(
-              1,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 100,
-                  margin: const EdgeInsets.only(bottom: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Obx(()=> Text(controller.getStringList[index].toString())),
-                            // Obx(()=> Text(controller.getTextName)),
-                            // Obx(()=> Text(controller.getTextAge)),
-                            // Obx(()=> Text(controller.getTextPosition)),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              )
-            ),
-          ),
-        )
-        // Obx(
-        //   () => Column(
-        //     spacing: 20,
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     children: [
-        //       Text(
-        //         'Number: ${controller.getCounter}',
-        //         style: TextStyle(
-        //           fontSize: 24,
-        //         ),
-        //       ),
-        //       Row(
-        //         spacing: 20,
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           controller.getCounter == 0
-        //               ? SizedBox()
-        //               : ElevatedButton(
-        //                   onPressed: () {
-        //                     controller.decrement();
-        //                   },
-        //                   child: Text("-")),
-        //           ElevatedButton(
-        //               onPressed: () {
-        //                 controller.increment();
-        //               },
-        //               child: Text("+"))
-        //         ],
-        //       )
-        //     ],
-        //   ),
-        // )
+              ),
+            );
+          },
+        );
+      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showDialog(),
+        child: Icon(Icons.add),
+      ),
     );
-  }
+}
 }

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter_review/models/emp_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalService {
@@ -6,7 +9,8 @@ class LocalService {
 
   late SharedPreferences _pref;
 
-  /// for access data
+  static const String _key = 'employees';
+
   static LocalService get instance => _sharePreferences;
 
 
@@ -15,22 +19,19 @@ class LocalService {
     _pref = await SharedPreferences.getInstance();
   }
 
-  // set string
-  Future<void> setData(String key, String value) async {
-    await _pref.setString(key, value);
-  }
-  // get string
-  String getData(String key) {
-    return _pref.getString(key) ?? '';
+
+  Future<List<EmpModel>> getEmployees() async {
+    final data = _pref.getString(_key);
+    if (data != null) {
+      List decoded = jsonDecode(data);
+      return decoded.map((e) => EmpModel.fromMap(e)).toList();
+    }
+    return [];
   }
 
 
-  // Set List
-  Future setEmpData(String key, List<String> value) async {
-    await _pref.setStringList(key, value);
-  }
-  // Get List
-  List<String> getEmpData(String key) {
-    return _pref.getStringList(key) ?? [];
+  Future<void> saveEmployee(List<EmpModel> emp) async{
+    final encoded = jsonEncode(emp.map((e) => e.toMap()).toList());
+    await _pref.setString(_key, encoded);
   }
 }
