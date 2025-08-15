@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_review/getx/home_controller.dart';
+import 'package:flutter_review/getx/employee_screen/home_controller.dart';
 import 'package:flutter_review/models/emp_model.dart';
 import 'package:get/get.dart';
 

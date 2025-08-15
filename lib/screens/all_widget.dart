@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../getx/home_view.dart';
+import '../getx/employee_screen/home_view.dart';
 
 class AllWidget extends StatefulWidget {
   const AllWidget({super.key});

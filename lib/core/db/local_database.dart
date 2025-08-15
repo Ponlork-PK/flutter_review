@@ -38,12 +38,12 @@ class LocalDatabase {
   }
 
 
-  Future getEmployees() async {
+  Future getProducts() async {
     final dbClient = await LocalDatabase().db;
     return await dbClient.query('employees');
   }
 
-  Future addEmployee(EmpModel emp) async {
+  Future addProducts(EmpModel emp) async {
     final dbClient = await LocalDatabase().db;
     return await dbClient.insert('employees', emp.toMap());
   }
@@ -53,7 +53,7 @@ class LocalDatabase {
   //   return await db.update('employees', where: 'id = ?', whereArgs: [id]);
   // }
 
-  Future deleteEmployee(String id) async {
+  Future deleteProducts(String id) async {
     final db = await LocalDatabase().db;
     return await db.delete('employees', where: 'id = ?', whereArgs: [id]);
   }
