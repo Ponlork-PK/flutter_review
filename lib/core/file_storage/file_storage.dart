@@ -39,11 +39,10 @@ class EmpFileStore {
     return items;
   }
 
-  /// Save all employees to TXT (overwrites file).
   Future<void> saveAll(List<EmpModel> employees) async {
     final f = await _file();
     final buf = StringBuffer();
-    buf.writeln('id\tname\tage\tposition'); // header (optional)
+    buf.writeln('id\tname\tage\tposition'); 
     for (final e in employees) {
       final safeName = e.name.replaceAll('\t', ' ').replaceAll('\n', ' ');
       final safePos  = e.position.replaceAll('\t', ' ').replaceAll('\n', ' ');
