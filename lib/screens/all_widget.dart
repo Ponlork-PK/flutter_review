@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../getx/employee_screen/home_view.dart';
+import 'package:flutter_review/getx/employee_shp_screen/home_view.dart';
+import 'package:flutter_review/getx/product_screen/product_view.dart';
+
 
 class AllWidget extends StatefulWidget {
   const AllWidget({super.key});
@@ -88,72 +90,93 @@ class _AllWidgetState extends State<AllWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextButton(
-                    onPressed: (){
-                      showDialog(
-                        context: context, 
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('New Recipe'),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            elevation: 5,
-                            actions: [
-                              TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'name',
-                                ),
-                              ),
-                              TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'list of ingredients',
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  TextButton(
-                                    onPressed: (){
-                                      Navigator.pop(context);
-                                    }, 
-                                    child: Text(
-                                      'Cancel',
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                      ),
+                  Row(
+                    spacing: 10,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: (){
+                          showDialog(
+                            context: context, 
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('New Recipe'),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                elevation: 5,
+                                actions: [
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'name',
                                     ),
                                   ),
-                                  TextButton(
-                                    onPressed: (){
-                                      Navigator.pop(context);
-                                    }, 
-                                    child: Text(
-                                      'Done',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue
-                                      ),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'list of ingredients',
                                     ),
                                   ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        }, 
+                                        child: Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        }, 
+                                        child: Text(
+                                          'Done',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  
                                 ],
-                              ),
-                              
-                            ],
+                              );
+                            }
                           );
-                        }
-                      );
-                    }, 
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      backgroundColor: Colors.blue,
-                    ),
-                    child: Text(
-                      'New',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
+                        }, 
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          backgroundColor: Colors.blue,
+                        ),
+                        child: Text(
+                          'New',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                      TextButton(
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          backgroundColor: Colors.deepPurple,
+                        ),
+                        child: Text(
+                          'Product',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
