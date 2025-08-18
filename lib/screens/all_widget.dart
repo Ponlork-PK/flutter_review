@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_review/getx/employee_file_screen/employee_view_file.dart';
 import 'package:flutter_review/getx/employee_shp_screen/home_view.dart';
 import 'package:flutter_review/getx/product_screen/product_view.dart';
 
@@ -162,6 +163,21 @@ class _AllWidgetState extends State<AllWidget> {
                         ),
                       ),
                       TextButton(
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          backgroundColor: Colors.deepPurple
+                        ),
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => EmployeeView()));
+                        },
+                        child: Text(
+                          'File',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                      TextButton(
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
                         },
@@ -170,7 +186,7 @@ class _AllWidgetState extends State<AllWidget> {
                           backgroundColor: Colors.deepPurple,
                         ),
                         child: Text(
-                          'Product',
+                          'SQLite',
                           style: TextStyle(
                             color: Colors.white
                           ),
