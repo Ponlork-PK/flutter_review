@@ -52,11 +52,6 @@ class LocalDatabase {
     return await dbClient.insert('products', products.toMap());
   }
 
-  // Future updateEmployee(String id) async {
-  //   final db = await LocalDatabase().db;
-  //   return await db.update('employees', where: 'id = ?', whereArgs: [id]);
-  // }
-
   Future deleteProducts(int id) async {
     final dbClient = await db;
     return await dbClient.delete('products', where: 'id = ?', whereArgs: [id]);

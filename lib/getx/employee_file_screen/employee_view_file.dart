@@ -68,6 +68,7 @@ class EmployeeView extends StatelessWidget {
                       final name = nameCtrl.text.trim();
                       final age = int.tryParse(ageCtrl.text.trim()) ?? 0;
                       final position = positionCtrl.text.trim();
+                      if( name.isEmpty || age == 0 || position.isEmpty) return;
                       if(isEdited) {
                         await controller.updateAt(controller.editingIndex.value!, EmpModel(name: name, age: age.toInt(), position: position));
                       } else {
@@ -78,7 +79,7 @@ class EmployeeView extends StatelessWidget {
                       positionCtrl.clear();
                     },
                     child: Text(
-                      isEdited ? 'Save' : 'Add Product',
+                      isEdited ? 'Save' : 'Add Employee',
                       style: TextStyle(color: Colors.white),
                     ));
                 }),

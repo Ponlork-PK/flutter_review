@@ -68,6 +68,7 @@ class ProductScreen extends StatelessWidget {
                       final name = nameController.text.trim();
                       final price = double.tryParse(priceController.text.trim()) ?? 0.0;
                       final quantity = int.tryParse(quantityController.text.trim()) ?? 0;
+                      if( name.isEmpty || price <= 0 || quantity <= 0) return;
                       if(isEdited) {
                         await controller.updateProducts(ProductsModel(id: controller.editId.value!, name: name, price: price, quantity: quantity));
                       } else {
