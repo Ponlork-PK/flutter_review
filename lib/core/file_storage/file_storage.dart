@@ -40,15 +40,15 @@ class EmpFileStore {
   }
 
   Future<void> saveAll(List<EmpModel> employees) async {
-    final f = await _file();
+    final file = await _file();
     final buf = StringBuffer();
     buf.writeln('id\tname\tage\tposition'); 
-    for (final e in employees) {
-      final safeName = e.name.replaceAll('\t', ' ').replaceAll('\n', ' ');
-      final safePos  = e.position.replaceAll('\t', ' ').replaceAll('\n', ' ');
-      final idStr = (e.id ?? '').toString();
-      buf.writeln('$idStr\t$safeName\t${e.age}\t$safePos');
+    for (final emp in employees) {
+      final safeName = emp.name.replaceAll('\t', ' ').replaceAll('\n', ' ');
+      final safePos  = emp.position.replaceAll('\t', ' ').replaceAll('\n', ' ');
+      final idStr = (emp.id ?? '').toString();
+      buf.writeln('$idStr\t$safeName\t${emp.age}\t$safePos');
     }
-    await f.writeAsString(buf.toString());
+    await file.writeAsString(buf.toString());
   }
 }

@@ -37,14 +37,14 @@ class EmpController extends GetxController {
     await _store.saveAll(employees);
   }
 
-  Future<void> updateAt(int index, EmpModel e) async {
+  Future<void> updateAt(int index, EmpModel emp) async {
     if (index < 0 || index >= employees.length) return;
     final current = employees[index];
     final updated = EmpModel(
-      id: current.id ?? e.id ?? _nextId(), // keep existing id
-      name: e.name,
-      age: e.age,
-      position: e.position,
+      id: current.id ?? emp.id ?? _nextId(), // keep existing id
+      name: emp.name,
+      age: emp.age,
+      position: emp.position,
     );
     employees[index] = updated;
     await _store.saveAll(employees);
