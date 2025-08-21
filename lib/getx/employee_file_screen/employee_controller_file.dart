@@ -58,6 +58,6 @@ class EmpController extends GetxController {
     if (editingIndex.value == index) editingIndex.value = null;
   }
 
-  void startEditing(int index) => editingIndex.value = index;
-  void cancelEditing() => editingIndex.value = null;
+  // void startEditing(int index) => editingIndex.value = index;
+  // void cancelEditing() => editingIndex.value = null;
 }

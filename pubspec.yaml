@@ -29,8 +29,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/ahmork.png
-    - assets/images/khmer_noodle.jpg
-    - assets/images/korko.jpg
-    - assets/images/loklak.jpg
-    - assets/images/rice.jpeg
+    - assets/images/file_storage.png
+    - assets/images/shared_preference.png
+    - assets/images/sqflite.png
+    - assets/images/gridview.png
