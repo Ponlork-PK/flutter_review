@@ -64,8 +64,14 @@ class _AllWidgetState extends State<AllWidget> {
       appBar: AppBar(
         title: Text('Persistent List'),
         actions: [
+          // IconButton(
+          //   onPressed: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationView()));
+          //   }, 
+          //   icon: Icon(Icons.notifications)
+          // ),
           Padding(
-            padding: const EdgeInsets.only(right: 5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: IconButton(
               icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
               onPressed: () {
@@ -74,7 +80,7 @@ class _AllWidgetState extends State<AllWidget> {
                 });
               },
             ),
-          )
+          ),
         ],
       ),
       /// Layout
@@ -148,7 +154,7 @@ class _AllWidgetState extends State<AllWidget> {
                   );
                 }
               ),
-            )
+            ),
           ],
         ),
       )

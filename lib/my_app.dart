@@ -63,6 +63,17 @@ class MyApp extends StatelessWidget {
       /// Text
       textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 18)),
 
+
+      /// Dialog
+      dialogTheme: DialogTheme(
+        titleTextStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.deepPurple,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+
       useMaterial3: true,
     );
   }
@@ -107,6 +118,18 @@ class MyApp extends StatelessWidget {
 
       /// Text
       textTheme: TextTheme (bodyMedium: TextStyle(fontSize: 18)),
+
+
+      /// Dialog
+      dialogTheme: DialogTheme(
+        backgroundColor: Colors.white,
+        titleTextStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.deepPurple,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
 
       useMaterial3: true,
     );
