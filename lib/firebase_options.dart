@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAIddIfTkyDFZFkumJ7Pi7ZPsE2mj5vcNM',
-    appId: '1:427050903484:android:2a0f737409f20e797dadb9',
-    messagingSenderId: '427050903484',
-    projectId: 'push-notification-84407',
-    storageBucket: 'push-notification-84407.firebasestorage.app',
+    apiKey: 'AIzaSyC7v9LQn2cXWdsUIIo9gCHi0X0B4TdSvpc',
+    appId: '1:44297322945:android:5bcd8ddbfa41a4de72ef40',
+    messagingSenderId: '44297322945',
+    projectId: 'push-notifications-8527c',
+    storageBucket: 'push-notifications-8527c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCjFfZDVa70jm9vqB-iilfUW93Pw7vRAys',
-    appId: '1:427050903484:ios:a77238c6f9565bcd7dadb9',
-    messagingSenderId: '427050903484',
-    projectId: 'push-notification-84407',
-    storageBucket: 'push-notification-84407.firebasestorage.app',
+    apiKey: 'AIzaSyDEfgXltBcqXOuI0lGsYVleGBAgW-rHKrg',
+    appId: '1:44297322945:ios:1163d5dd128ed65e72ef40',
+    messagingSenderId: '44297322945',
+    projectId: 'push-notifications-8527c',
+    storageBucket: 'push-notifications-8527c.firebasestorage.app',
     iosBundleId: 'com.example.flutterReview',
   );
+
 }
