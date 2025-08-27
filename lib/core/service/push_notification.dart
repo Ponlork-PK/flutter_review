@@ -14,7 +14,7 @@ class PushNotification {
     final token = await _firebaseMessaging.getToken();
     // ignore: avoid_print
     print('Device Token: $token');
-
+    
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       // ignore: avoid_print
       // print('Message: ${message.notification?.title}');
