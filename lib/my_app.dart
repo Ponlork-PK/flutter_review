@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
 
 
       /// Dialog
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         titleTextStyle: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class MyApp extends StatelessWidget {
 
 
       /// Dialog
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: Colors.white,
         titleTextStyle: TextStyle(
           fontSize: 24,
