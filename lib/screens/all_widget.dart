@@ -1,4 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_review/getx/employee_file_screen/employee_view_file.dart';
 import 'package:flutter_review/getx/employee_shp_screen/home_view.dart';
 import 'package:flutter_review/getx/product_screen/product_view.dart';
@@ -56,12 +58,44 @@ class _AllWidgetState extends State<AllWidget> {
       });
     });
   }
+  String? _fcmToken;
+
+  @override
+  void initState() {
+    super.initState();
+    getToken(); // fetch on startup
+  }
+
+  void getToken() async {
+    final _message = FirebaseMessaging.instance;
+    final token = await _message.getToken();
+    print('FCM token: $token');
+
+    setState(() {
+      _fcmToken = token;
+    });
+  }
+  void _copyToken() {
+    if (_fcmToken != null) {
+      Clipboard.setData(ClipboardData(text: _fcmToken.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Token copied ✅")),
+      );
+    }
+  }
+  
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: IconButton(onPressed: (){
+            _copyToken();
+          }, icon: Icon(Icons.add)),
+        ),
         title: Text('Persistent List'),
         actions: [
           // IconButton(

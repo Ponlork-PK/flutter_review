@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotificationDetail extends StatelessWidget {
-
-  final String? title;
-  final String? body;
-  const NotificationDetail({super.key, required this.title, required this.body});
+  const NotificationDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final data = Map<String, String>.from(Get.arguments ?? {});
+    final title = data['screen'] ?? 'N/A';
+    final position = data['position'] ?? 'N/A';
+    final name = data['name'] ?? '0';
     return Scaffold(
       appBar: AppBar(
-        title: Text(title!),
+        title: Text(title)
       ),
-      body: Center(child: Text(body!)),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text('Hello, $name'),
+                  Text('Position: $position'),
+                ]
+              )
+            ],
+          ),
+          
+        ],
+      ),
     );
   }
 }

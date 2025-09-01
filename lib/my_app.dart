@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_review/getx/notification_detail_screen/notification_detail.dart';
 import 'package:flutter_review/screens/all_widget.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/detail', page: ()=> NotificationDetail()),
+        GetPage(name: '/home', page: ()=> AllWidget()),
+      ],
       debugShowCheckedModeBanner: false,
       title: 'Review',
       theme: _lightMode(),
